@@ -23,7 +23,7 @@ function CardUser({ user, matches }) {
           <Typography variant={matches ? "h5" : "h6"}>{user.login}</Typography>
         </Stack>
 
-        <Typography>{user.bio}</Typography>
+        <Typography textAlign={"center"}>{user.bio}</Typography>
       </Stack>
 
       <Stack

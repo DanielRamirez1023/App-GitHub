@@ -1,0 +1,86 @@
+.porcentaje {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 10vh;
+  background: transparent;
+}
+
+.container {
+  position: absolute;
+  width: 5px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.container .card {
+  position: relative;
+  width: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.5s;
+  padding-top: 40px;
+}
+.container .card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.container .card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50;
+  background: white;
+  pointer-events: none;
+  z-index: 1;
+}
+.porcent {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 10%;
+  z-index: 1000;
+}
+
+.porcent .number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0%;
+}
+.porcent .number h2 {
+  color: #000;
+  font-weight: 700;
+  padding-top: 18px;
+  font-size: 25px;
+  transition: 0.5s;
+}
+
+.container svg {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  transform: rotate(-85deg) !important;
+}
+
+.container svg circle {
+  width: 20%;
+  height: 20%;
+  fill: none;
+  stroke: #c0aaaaa2;
+  stroke-width: 10;
+  stroke-linecap: round !important;
+  transform: translate(20px, 3px);
+}

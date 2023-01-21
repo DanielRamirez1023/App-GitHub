@@ -1,24 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import { Container } from "@mui/system";
+import Searcher from "./components/Searcher";
+import { useEffect, useState } from "react";
+import { getUserGithub } from "./users";
+import CardUser from "./components/CardUser";
+import { CircularProgress, useMediaQuery } from "@mui/material";
 
 function App() {
+  const [stateInitial, setStateInitial] = useState("octocat");
+  const [user, setUser] = useState("");
+  const [loading, setLoading] = useState(false);
+  const matches = useMediaQuery("(min-width:600px)");
+
+  useEffect(() => {
+    (async () => {
+      setLoading(false);
+      let result = await getUserGithub(stateInitial);
+
+      if (result.message === "Not Found") {
+        result = await getUserGithub("octocat");
+      }
+
+      console.log(result);
+      setUser(result);
+    })();
+
+    setTimeout(function () {
+      setLoading(true);
+    }, 800);
+  }, [stateInitial]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Container
+        sx={{
+          background: "whiteSmoke",
+          borderRadius: "5px",
+          marginTop: matches ? "50px" : "0px",
+          paddingBottom: "30px",
+          height: "auto",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Searcher
+          valueInitial={stateInitial}
+          setStateInitial={setStateInitial}
+          setLoading={setLoading}
+          matches={matches}
+        />
+
+        {!loading ? (
+          <CircularProgress sx={{ marginTop: "80px" }} color="primary" />
+        ) : (
+          <CardUser user={user} matches={matches} />
+        )}
+      </Container>
+    </>
   );
 }
 
